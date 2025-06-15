@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Agent Father - The Knowledge Guardian</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 70%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Cyber Grid Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-particle {
+            0% { opacity: 0; transform: translateY(100vh) translateX(0); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff) border-box;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            border-radius: 20px;
+            z-index: -1;
+            animation: neon-rotate 4s linear infinite;
+        }
+
+        @keyframes neon-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            background: rgba(0, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: hologram 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            letter-spacing: 3px;
+        }
+
+        @keyframes hologram {
+            0%, 100% { 
+                filter: blur(0px);
+                transform: scale(1);
+            }
+            50% { 
+                filter: blur(1px);
+                transform: scale(1.02);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: type-writer 3s steps(40, end);
+        }
+
+        @keyframes type-writer {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .brain-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: brain-pulse 2s infinite, rotate-slow 10s linear infinite;
+            filter: drop-shadow(0 0 20px #00ffff);
+        }
+
+        @keyframes brain-pulse {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.1) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(360deg); }
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotateZ(0deg); }
+            to { transform: rotateZ(360deg); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin: 6rem 0;
+            padding: 4rem;
+            background: rgba(0, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(0, 255, 255, 0.3), transparent, rgba(255, 0, 255, 0.3), transparent);
+            animation: section-rotate 8s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes section-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 30px 60px rgba(0, 255, 255, 0.4),
+                inset 0 0 50px rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            animation: icon-float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px #00ffff);
+        }
+
+        @keyframes icon-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.8s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 
+                0 25px 50px rgba(0, 255, 255, 0.4),
+                inset 0 0 30px rgba(255, 0, 255, 0.2);
+            border-color: #ff00ff;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', monospace;
+            color: #ffff00;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+        }
+
+        .feature-card p {
+            color: #b0f0ff;
+            line-height: 1.8;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .arch-step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            position: relative;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .arch-step:hover {
+            transform: scale(1.1) rotateY(10deg);
+            border-color: #ffff00;
+            box-shadow: 0 20px 40px rgba(255, 255, 0, 0.4);
+        }
+
+        .arch-step h3 {
+            font-family: 'Orbitron', monospace;
+            color: #ffff00;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+        }
+
+        .arch-step::after {
+            content: '⟫';
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: #00ffff;
+            animation: arrow-pulse 2s infinite;
+        }
+
+        .arch-step:last-child::after {
+            display: none;
+        }
+
+        @keyframes arrow-pulse {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        /* Roadmap */
+        .roadmap {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(to bottom, #00ffff, #ff00ff, #ffff00);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: rgba(0, 255, 255, 0.08);
+            border-radius: 20px;
+            margin-left: 3rem;
+            transition: all 0.5s ease;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: #00ffff;
+            border-radius: 50%;
+            border: 6px solid #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            animation: roadmap-pulse 2s infinite;
+        }
+
+        @keyframes roadmap-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 255, 1); }
+        }
+
+        .roadmap-item:hover {
+            transform: translateX(20px) scale(1.02);
+            background: rgba(0, 255, 255, 0.15);
+            border-color: #ff00ff;
+            box-shadow: 0 15px 30px rgba(255, 0, 255, 0.4);
+        }
+
+        .roadmap-item.completed::before {
+            background: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+        }
+
+        .roadmap-item.in-progress::before {
+            background: #ffff00;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+        }
+
+        .phase {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: #ffff00;
+            font-size: 1.3rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .roadmap-item h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .roadmap-item p {
+            color: #b0f0ff;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 6rem 0;
+            position: relative;
+        }
+
+        .cta-section h2 {
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 3rem;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 2rem 4rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 255, 255, 0.6),
+                0 0 60px rgba(255, 0, 255, 0.4);
+            border-color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem;
+                margin: 3rem 0;
+            }
+            
+            .architecture {
+                flex-direction: column;
+            }
+            
+            .arch-step::after {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #ff00ff, #ffff00);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cyber-loader {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(0, 255, 255, 0.3);
+            border-top: 4px solid #00ffff;
+            border-radius: 50%;
+            animation: cyber-spin 1s linear infinite;
+        }
+
+        @keyframes cyber-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="cyber-loader"></div>
+    </div>
+
+    <div class="cyber-grid"></div>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="header-glow"></div>
+        <div class="hero">
+            <span class="brain-icon"><img src="logo.png" alt="Agent Father Logo"></span>
+            <h1>AGENT FATHER</h1>
+            <p class="subtitle">The Knowledge Guardian of the Virtuals Ecosystem</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Purpose Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                Purpose of the Project
+            </h2>
+            <p>Agent Father is a unified knowledge base that gathers all current and upcoming Genesis AI agent projects within the Virtuals Protocol ecosystem. It provides up-to-date, accurate, and easily accessible information about these projects. As new agents launch, the system continuously feeds and retrains its AI to answer user questions effectively.</p>
+        </section>
+
+        <!-- Target Audience -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">👥</span>
+                Target Audience
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>💰 Investors</h3>
+                    <p>Quickly access project insights before committing capital</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔬 Researchers</h3>
+                    <p>Compare and analyze agents side-by-side</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🚀 Project Teams</h3>
+                    <p>Monitor the visibility and accuracy of their project data</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌟 Community Members</h3>
+                    <p>Stay informed about the ecosystem and discover new opportunities</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">⚙️</span>
+                Key Features
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📋 Project Description</h3>
+                    <p>Comprehensive project description & use case for each Genesis AI agent</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👨‍💼 Team Information</h3>
+                    <p>Detailed team information and roadmap overview</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💎 Tokenomics</h3>
+                    <p>FDV, allocation, staking requirements, and social links</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Continuous Updates</h3>
+                    <p>Continuously updated as new projects are added</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤖 AI Interaction</h3>
+                    <p>Users can ask questions directly to the Agent Father</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔌 Real-time Data</h3>
+                    <p>Powered by real-time data via Virtuals API integrations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Architecture -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🧩</span>
+                Technical Architecture
+            </h2>
+            <div class="architecture">
+                <div class="arch-step">
+                    <h3>📊 Data Source</h3>
+                    <p>Virtuals APIs</p>
+                </div>
+                <div class="arch-step">
+                    <h3>⚡ Processing Engine</h3>
+                    <p>Advanced filtering & AI summarization</p>
+                </div>
+                <div class="arch-step">
+                    <h3>🎓 Model Training</h3>
+                    <p>Agent trained on structured information from all Genesis projects</p>
+                </div>
+                <div class="arch-step">
+                    <h3>🚀 Response Engine</h3>
+                    <p>LLM-based system that interprets and summarizes relevant data</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Makes It Different -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🚀</span>
+                What Makes It Different?
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📱 Direct Structured Data</h3>
+                    <p>Unlike X posts or Discord announcements, Agent Father relies on direct structured data</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💳 Rich Info Cards</h3>
+                    <p>Each agent has a rich, dedicated info card</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ Verified Access</h3>
+                    <p>Offers verified and centralized access to project knowledge</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔍 AI-Powered Search</h3>
+                    <p>Enables AI-powered search, summarization, and comparison across agents</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🛣</span>
+                Roadmap
+            </h2>
+            <div class="roadmap">
+                <div class="roadmap-item completed">
+                    <div class="phase">✅ KICKOFF</div>
+                    <h3>Project concept & data source mapping</h3>
+                    <p><strong>Timeline:</strong> June 2025</p>
+                </div>
+                <div class="roadmap-item in-progress">
+                    <div class="phase">🔄 MODEL TRAINING</div>
+                    <h3>Train on the first 50 Genesis agents</h3>
+                    <p><strong>Timeline:</strong> July 2025</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="phase">⏳ VERSION 1</div>
+                    <h3>Public launch with info delivery and Q&A features</h3>
+                    <p><strong>Timeline:</strong> August 2025</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="phase">📊 EXPANSION</div>
+                    <h3>Add comparison tools and rating systems</h3>
+                    <p><strong>Timeline:</strong> September 2025</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="phase">🧩 COMMUNITY CONTRIBUTION</div>
+                    <h3>Enable user-submitted content and feedback</h3>
+                    <p><strong>Timeline:</strong> October 2025</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="phase">🌐 IDO PLATFORM SCANNING</div>
+                    <h3>Integrate data from external IDO platforms and provide similar coverage</h3>
+                    <p><strong>Timeline:</strong> November 2025</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>ENTER THE FUTURE OF AI ECOSYSTEM</h2>
+            <a href="#" class="cta-button">Launch Protocol</a>
+        </section>
+    </div>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 1500);
+        });
+
+        // Create particle system
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                // Random colors
+                const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff88'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Initialize animations
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(100px) scale(0.8)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Parallax effect for cyber grid
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const grid = document.querySelector('.cyber-grid');
+            if (grid) {
+                grid.style.transform = `translate(${scrolled * 0.1}px, ${scrolled * 0.1}px)`;
+            }
+
+            // Parallax for particles
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                const speed = 0.02 + (index % 5) * 0.01;
+                particle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Mouse follow effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, #00ffff, transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    mix-blend-mode: difference;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursor2 = document.querySelector('.cursor');
+            if (cursor2) {
+                cursor2.style.left = e.clientX - 10 + 'px';
+                cursor2.style.top = e.clientY - 10 + 'px';
+            }
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Add glitch effect to title on hover
+        const title = document.querySelector('.hero h1');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s ease-in-out 3';
+            });
+        }
+
+        // Add CSS for glitch effect
+        const glitchCSS = `
+            @keyframes glitch {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(-2px); }
+                40% { transform: translateX(2px); }
+                60% { transform: translateX(-1px); }
+                80% { transform: translateX(1px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = glitchCSS;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
