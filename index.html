@@ -259,6 +259,205 @@
             50% { transform: translateY(-10px) rotate(5deg); }
         }
 
+        /* Demo Section Specific Styles */
+        .demo-section {
+            background: rgba(255, 0, 255, 0.05);
+            border-color: rgba(255, 0, 255, 0.3);
+        }
+
+        .demo-section::before {
+            background: conic-gradient(transparent, rgba(255, 0, 255, 0.3), transparent, rgba(255, 255, 0, 0.3), transparent);
+        }
+
+        .demo-section:hover {
+            border-color: #ff00ff;
+            box-shadow: 
+                0 30px 60px rgba(255, 0, 255, 0.4),
+                inset 0 0 50px rgba(255, 0, 255, 0.1);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            color: #fff;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.2rem;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .search-results {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            display: none;
+        }
+
+        .result-item {
+            padding: 1.5rem 2rem;
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .result-item:hover::before {
+            left: 100%;
+        }
+
+        .result-item:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 0, 255, 0.2);
+        }
+
+        .result-item.selected {
+            border-color: #ffff00;
+            background: rgba(255, 255, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.6);
+        }
+
+        .result-symbol {
+            font-family: 'Orbitron', monospace;
+            color: #ffff00;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-name {
+            color: #00ffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-id {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .overview-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 0, 0.1);
+            border: 2px solid rgba(255, 255, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            display: none;
+            animation: slideInUp 0.6s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .overview-title {
+            font-family: 'Orbitron', monospace;
+            color: #ffff00;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+            text-align: center;
+        }
+
+        .overview-content {
+            color: #f0f0f0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            min-height: 50px;
+        }
+
+        .overview-loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .overview-loading .loading-spinner {
+            display: inline-block;
+            margin: 1rem auto;
+        }
+
+        .overview-loading p {
+            color: #00ffff;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            display: none;
+        }
+
         /* Feature Cards */
         .features-grid {
             display: grid;
@@ -544,6 +743,13 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            .search-container,
+            .search-results,
+            .overview-container {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
         }
 
         /* Custom Scrollbar */
@@ -620,6 +826,43 @@
     </header>
 
     <div class="container">
+        <!-- Demo Section -->
+        <section class="section demo-section">
+            <h2 class="section-title">
+                <span class="section-icon">🤖</span>
+                Try Agent Father Demo
+            </h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: #b0f0ff; font-size: 1.2rem;">
+                Search for any Genesis AI agent and discover comprehensive information instantly
+            </p>
+            
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Enter agent name, symbol, or token address..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <!-- Search results will be populated here -->
+            </div>
+
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="overview-container" id="overviewContainer">
+                <h3 class="overview-title">Agent Overview</h3>
+                <div class="overview-loading" id="overviewLoading">
+                    <div class="loading-spinner"></div>
+                    <p>Analyzing agent data with AI...</p>
+                </div>
+                <div class="overview-content" id="overviewContent"></div>
+            </div>
+        </section>
+
         <!-- Purpose Section -->
         <section class="section">
             <h2 class="section-title">
@@ -787,8 +1030,263 @@
             <a href="https://app.virtuals.io/geneses/5566" class="cta-button" target="_blank">Launch Protocol</a>
         </section>
     </div>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module">
+	
+        import { GoogleGenAI } from 'https://esm.sh/@google/genai@0.7.0/es2022/genai.mjs';
+        
+        let searchTimeout;
+        let agentsData = [];
+        let selectedAgent = null;
 
-    <script>
+        // Initialize Gemini AI
+        const ai = new GoogleGenAI({ apiKey: 'AIzaSyBMOqsjKB2P5wsCvujCr6ZIulGmparFURQ' });
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMessage = document.getElementById('errorMessage');
+        const overviewContainer = document.getElementById('overviewContainer');
+        const overviewContent = document.getElementById('overviewContent');
+        const overviewLoading = document.getElementById('overviewLoading');
+
+        // Initialize event listeners
+        searchInput.addEventListener('input', handleSearch);
+
+        // Handle search input with debouncing
+        function handleSearch(event) {
+            const query = event.target.value.trim();
+            
+            // Clear existing timeout
+            clearTimeout(searchTimeout);
+            
+            // Reset results and hide overview
+            hideSearchResults();
+            hideOverview();
+            hideError();
+            
+            if (query.length < 2) {
+                return;
+            }
+
+            // Debounce search to avoid too many API calls
+            searchTimeout = setTimeout(() => {
+                searchAgents(query);
+            }, 500);
+        }
+
+        // Search agents via API
+        async function searchAgents(query) {
+            showLoading();
+            
+            try {
+                const encodedQuery = encodeURIComponent(query);
+                const url = `https://api.virtuals.io/api/virtuals?filters[status]=3&filters[$or][0][name][$contains]=${encodedQuery}&filters[$or][1][symbol][$contains]=${encodedQuery}&filters[$or][2][tokenAddress][$contains]=${encodedQuery}&filters[$or][3][preToken][$contains]=${encodedQuery}&sort[0]=totalValueLocked%3Adesc&sort[1]=createdAt%3Adesc&populate[0]=image&populate[1]=genesis&pagination[page]=1&pagination[pageSize]=10`;
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.data && data.data.length > 0) {
+                    agentsData = data.data;
+                    displaySearchResults(data.data);
+                } else {
+                    showError('No agents found for your search query.');
+                    hideSearchResults();
+                }
+                
+            } catch (error) {
+                console.error('Search error:', error);
+                showError('Failed to search agents. Please try again.');
+                hideSearchResults();
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Display search results as list
+        function displaySearchResults(agents) {
+            searchResults.innerHTML = '';
+            
+            agents.forEach((agent) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.dataset.agentId = agent.id;
+                
+                resultItem.innerHTML = `
+                    <div class="result-symbol">${agent.symbol}</div>
+                    <div class="result-name">${agent.name}</div>
+                    <div class="result-id">ID: ${agent.id}</div>
+                `;
+                
+                resultItem.addEventListener('click', () => handleAgentSelection(agent.id, resultItem));
+                searchResults.appendChild(resultItem);
+            });
+            
+            searchResults.style.display = 'block';
+        }
+
+        // Handle agent selection from list
+	async function handleAgentSelection(agentId, itemElement) {
+    // Remove all other result items, keep only the selected one
+    document.querySelectorAll('.result-item').forEach(item => {
+        if (item !== itemElement) {
+            item.remove();
+        }
+    });
+    
+    // Add selection styling to the remaining item
+    itemElement.classList.add('selected');
+    
+    // Show overview container and focus on it
+    showOverview();
+    focusOnOverview();
+    
+    // Show loading in overview
+    showOverviewLoading();
+    
+    selectedAgent = agentId;
+
+    await getAgentDetails(agentId);
+}
+
+        // Get detailed agent information
+        async function getAgentDetails(agentId) {
+            hideError();
+            
+            try {
+                const url = `https://api.virtuals.io/api/virtuals/${agentId}?populate[0]=image&populate[1]=tags&populate[2]=framework&populate[3]=venturePartner.image&populate[4]=venturePartner.banner&populate[5]=genesis`;
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.data && data.data.overview) {
+                    await summarizeWithGemini(data.data.overview);
+                } else {
+                    hideOverviewLoading();
+                    showError('No overview information available for this agent.');
+                }
+                
+            } catch (error) {
+                console.error('Agent details error:', error);
+                hideOverviewLoading();
+                showError('Failed to load agent details. Please try again.');
+            }
+        }
+
+        // Summarize overview with Gemini AI
+        async function summarizeWithGemini(overviewText) {
+            try {
+                const prompt = `I have a project with the following details. Please analyze it comprehensively. Identify the core goals, potential strengths, weaknesses, opportunities, risks, and suggest improvements if applicable. Additionally, evaluate the clarity, feasibility, and potential impact of the project. Respond in structured format with headings.
+
+${overviewText}
+
+Make sure to include:
+- A brief summary of what this project is about
+- Key strengths and unique aspects
+- Potential weaknesses or unclear points
+- Suggestions for improvement
+- Overall impression and potential for success
+`;
+
+                const result = await ai.models.generateContent({
+                    model: 'gemini-2.0-flash-exp',
+                    contents: prompt,
+                });
+
+                const summary = marked.parse(result.candidates[0].content.parts[0].text);
+
+                hideOverviewLoading();
+                displayOverview(summary);
+                
+            } catch (error) {
+                console.error('Gemini AI error:', error);
+                // Fallback to original overview if Gemini fails
+                hideOverviewLoading();
+                displayOverview(overviewText);
+                showError('AI summarization failed, showing original text.');
+            }
+        }
+
+        // Display agent overview
+        function displayOverview(content) {
+            overviewContent.innerHTML = content.replace(/\n/g, '<br>');
+            overviewContent.style.display = 'block';
+        }
+
+        // Focus on overview container
+        function focusOnOverview() {
+            setTimeout(() => {
+                overviewContainer.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                
+                // Add a visual highlight effect
+                overviewContainer.style.transform = 'scale(1.02)';
+                overviewContainer.style.boxShadow = '0 0 50px rgba(255, 255, 0, 0.8)';
+                
+                setTimeout(() => {
+                    overviewContainer.style.transform = 'scale(1)';
+                    overviewContainer.style.boxShadow = '';
+                }, 1000);
+            }, 100);
+        }
+
+        // Utility functions
+        function hideSearchResults() {
+            searchResults.style.display = 'none';
+            searchResults.innerHTML = '';
+            agentsData = [];
+        }
+
+        function showLoading() {
+            loadingSpinner.style.display = 'block';
+        }
+
+        function hideLoading() {
+            loadingSpinner.style.display = 'none';
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        function showOverview() {
+            overviewContainer.style.display = 'block';
+        }
+
+        function hideOverview() {
+            overviewContainer.style.display = 'none';
+            overviewContent.style.display = 'none';
+            hideOverviewLoading();
+        }
+
+        function showOverviewLoading() {
+            overviewLoading.style.display = 'block';
+            overviewContent.style.display = 'none';
+        }
+
+        function hideOverviewLoading() {
+            overviewLoading.style.display = 'none';
+        }
+
+        // Original page functionality
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingOverlay').classList.add('fade-out');
